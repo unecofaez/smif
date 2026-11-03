@@ -49,10 +49,12 @@ padding:40px;
 }
 
 .logo{
-width:220px;
-max-width:90%;
-margin-bottom:30px;
-filter:drop-shadow(0 5px 10px rgba(0,0,0,.3));
+    width:100px;
+    max-width:100px;
+    height:auto;
+    margin:0 auto 20px;
+    display:block;
+    background:transparent;
 }
 
 h1{
@@ -113,16 +115,20 @@ font-weight:600;
 color:#8ee59c;
 }
 
-@media(max-width:768px){
+@media(max-width:480px){
 
-h1{
-font-size:2rem;
+    .logo{
+        width:50px;
+        max-width:50px;
+        margin-bottom:10px;
+    }
+
+    h1{
+        font-size:1.4rem;
+    }
+
 }
-
-h2{
-font-size:1rem;
-}
-
+    
 .message p{
 font-size:1rem;
 }
