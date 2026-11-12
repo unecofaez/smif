@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UNECOFAEZ | Plataforma Territorial Forestal</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#0f5132;--verde-sec:#1d6f42;--dorado:#d6a73a;--gris:#f4f6f8;--bg:#fff;--card:#fff;--txt:#333;--tit:#0f5132;--line:#e3e8e5;--rojo:#c0392b;--nar:#e67e22;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--gris:#13211a;--bg:#0d1813;--card:#182a21;--txt:#d9e3dc;--tit:#7fd39a;--line:#2a4034}}
+:root[data-theme="dark"]{--gris:#13211a;--bg:#0d1813;--card:#182a21;--txt:#d9e3dc;--tit:#7fd39a;--line:#2a4034}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:'Montserrat',Arial,sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden}
+header{position:fixed;top:0;left:0;width:100%;z-index:99;background:rgba(10,25,15,.92);backdrop-filter:blur(15px);border-bottom:1px solid rgba(255,255,255,.08);padding-top:env(safe-area-inset-top,0px)}
+.navbar{max-width:1400px;margin:auto;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 25px}
+.logo-box{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:.95rem}
+.logo-box img{width:40px;height:40px;object-fit:contain;border-radius:50%}
+.menu{display:flex;gap:24px}
+.menu a{color:#fff;text-decoration:none;font-size:.85rem;transition:.3s}
+.menu a:hover,.menu a.fire{color:var(--dorado)}
+.menu a.fire{font-weight:700}
+.hero{min-height:100vh;background:radial-gradient(circle at 20% 20%,#1d6f42 0,transparent 55%),linear-gradient(160deg,#08210f,#0f3d22 60%,#05180c);display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 70px}
+.hero-content{width:100%;max-width:1200px}
+.hero h1{color:#fff;font-size:4rem;line-height:1.1;font-weight:800;margin-bottom:20px}
+.hero p{color:#e9f0ea;max-width:800px;margin:0 auto 35px;line-height:1.8;font-size:1.1rem}
+.btn-group{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+.btn{text-decoration:none;padding:15px 30px;border-radius:50px;font-weight:700;transition:.3s}
+.btn-primary{background:var(--dorado);color:#222}
+.btn-primary:hover{transform:translateY(-3px)}
+.btn-secondary{border:2px solid #fff;color:#fff}
+.btn-secondary:hover{background:#fff;color:#222}
+.hero-stats{margin:50px auto 0;display:flex;justify-content:center;gap:35px;flex-wrap:wrap;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:25px;border-radius:18px;max-width:1100px}
+.hero-stat{text-align:center;min-width:120px}
+.hero-stat strong{display:block;font-size:2rem;font-weight:800;color:#FFD54F}
+.hero-stat span{color:#fff;font-size:.85rem}
+.section{padding:90px 6%}
+.section-title{text-align:center;margin-bottom:45px}
+.section-title h2{color:var(--tit);font-size:2.4rem;margin-bottom:12px}
+.section-title p{max-width:800px;margin:auto;line-height:1.8}
+.wrap{max-width:1300px;margin:auto}
+.map-placeholder{height:480px;border-radius:25px;background:linear-gradient(135deg,#2e7d32,#0f5132);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;font-weight:700;text-align:center;padding:20px;box-shadow:0 20px 50px rgba(0,0,0,.12)}
+.alt{background:var(--gris)}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
+.card{background:var(--card);padding:30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.06);transition:.3s;border:1px solid var(--line)}
+.card:hover{transform:translateY(-6px)}
+.card .icon{font-size:36px;margin-bottom:12px}
+.card h3{color:var(--tit);margin-bottom:10px;font-size:1.05rem}
+.card p,.card li{line-height:1.7;font-size:.92rem}
+.card ul{padding-left:18px}
+.card.link{border-top:4px solid var(--dorado)}
+/* incendios */
+.fire-hero{background:linear-gradient(135deg,#0f5132,#1d6f42);color:#fff;border-radius:25px;padding:50px;margin-bottom:30px}
+.fire-hero h3{font-size:1.5rem;margin-bottom:12px}
+.fire-hero p{line-height:1.8;max-width:900px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:30px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;text-align:center}
+.kpi strong{display:block;font-size:2rem;font-weight:800;color:var(--tit)}
+.kpi span{font-size:.82rem}
+.kpi.r strong{color:var(--rojo)}
+.sub{color:var(--tit);font-size:1.5rem;margin:50px 0 20px;font-weight:800}
+.comp{counter-reset:c;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.comp .card{position:relative;padding-top:48px}
+.comp .card::before{counter-increment:c;content:counter(c);position:absolute;top:-1px;left:24px;background:var(--dorado);color:#222;font-weight:800;width:38px;height:44px;border-radius:0 0 12px 12px;display:flex;align-items:center;justify-content:center}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.bars .row{display:flex;height:34px;border-radius:10px;overflow:hidden;margin:12px 0}
+.bars .row div{display:flex;align-items:center;justify-content:center;color:#fff;font-size:.78rem;font-weight:700}
+.legend{font-size:.85rem;line-height:1.9}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px}
+.tbl{overflow-x:auto;background:var(--card);border-radius:18px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:640px}
+th{background:var(--verde);color:#fff;text-align:left;padding:13px 14px;font-weight:600}
+td{padding:12px 14px;border-bottom:1px solid var(--line)}
+.cv{display:flex;align-items:center;gap:8px}
+.cv b{display:block;height:8px;border-radius:5px;background:var(--verde-sec)}
+.cv u{display:block;flex:1;max-width:110px;height:8px;border-radius:5px;background:var(--line);text-decoration:none}
+.tag{padding:4px 11px;border-radius:30px;font-size:.72rem;font-weight:700;color:#fff;white-space:nowrap}
+.t-ex{background:#2e7d32}.t-bu{background:#7cb342;color:#1b2b10}.t-al{background:var(--rojo)}.t-me{background:var(--nar)}
+.note{margin-top:14px;font-size:.82rem;line-height:1.7;opacity:.85}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.step{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--dorado);border-radius:12px;padding:16px;font-size:.88rem;line-height:1.6}
+.step b{color:var(--tit);display:block}
+.inv{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.territorio-box{background:linear-gradient(135deg,var(--verde),var(--verde-sec));color:#fff;border-radius:25px;padding:60px}
+.tags{margin-top:25px;display:flex;flex-wrap:wrap;gap:12px}
+.tags span{background:rgba(255,255,255,.15);padding:10px 16px;border-radius:40px;font-size:.9rem}
+footer{background:#112219;color:#fff;text-align:center;padding:70px 20px calc(70px + env(safe-area-inset-bottom,0px))}
+footer p{line-height:1.8}
+@media(max-width:900px){.menu{display:none}.hero h1{font-size:2.6rem}.two{grid-template-columns:1fr}.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.hero-stat{min-width:auto}.hero-stat strong{font-size:1.4rem}.hero-stat span{font-size:.72rem}.fire-hero{padding:30px}}
+@media(max-width:600px){.hero h1{font-size:2rem}.hero-stats{grid-template-columns:repeat(2,1fr)}.btn{width:100%;text-align:center}.map-placeholder{height:260px;font-size:1.1rem}.territorio-box{padding:30px}.section-title h2{font-size:1.8rem}}
+</style>
+</head>
+<body>
+<header><div class="navbar">
+<div class="logo-box"><img src="data:image/jpeg;base64,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" alt="UNECOFAEZ">UNECOFAEZ</div>
+<nav class="menu"><a href="#">Inicio</a><a href="#geoportal">Geoportal</a><a href="#incendios" class="fire">🔥 Incendios Forestales</a><a href="#modulos">Módulos</a><a href="#territorio">Territorio</a><a href="#contacto">Contacto</a></nav>
+</div></header>
+
+<section class="hero"><div class="hero-content">
+<h1>Plataforma Territorial Forestal</h1>
+<p>Sistema Integral de Monitoreo de Incendios Forestales, Gestión Territorial, Biodiversidad y Monitoreo, Reporte y Verificación (MRV).</p>
+<div class="btn-group"><a href="#geoportal" class="btn btn-primary">Acceder al Geoportal</a><a href="#incendios" class="btn btn-secondary">Monitoreo de Incendios</a></div>
+<div class="hero-stats">
+<div class="hero-stat"><strong>78</strong><span>Núcleos Agrarios</span></div>
+<div class="hero-stat"><strong>9,837</strong><span>Productores</span></div>
+<div class="hero-stat"><strong>540</strong><span>Localidades</span></div>
+<div class="hero-stat"><strong>8</strong><span>Municipios</span></div>
+<div class="hero-stat"><strong>1.08 Mha</strong><span>Cobertura</span></div>
+<div class="hero-stat"><strong>9</strong><span>Torres de Observación</span></div>
+</div></div></section>
+
+<section id="geoportal" class="section"><div class="wrap">
+<div class="section-title"><h2>Geoportal Territorial</h2><p>Plataforma geoespacial para monitoreo forestal, gestión ambiental, biodiversidad, incendios y análisis territorial.</p></div>
+<div class="map-placeholder">VISOR CARTOGRÁFICO UNECOFAEZ<br>Capas: núcleos agrarios · torres · radios de cobertura · incendios</div>
+</div></section>
+
+<!-- ============ INCENDIOS FORESTALES ============ -->
+<section id="incendios" class="section alt"><div class="wrap">
+<div class="section-title"><h2>🔥 Monitoreo de Incendios Forestales</h2><p>Estrategia Regional de Manejo del Fuego, Zona Noroeste 2025: red de 9 torres de observación con cámaras PTZ, coordinada con CONAFOR y SRNMA Durango.</p></div>
+
+<div class="fire-hero"><h3>Objetivo general de la Estrategia</h3>
+<p>Lograr una coordinación de esfuerzos para contribuir en la disminución del número de incendios y la superficie afectada, fortaleciendo la prevención y mejorando la eficiencia y eficacia del combate y control de incendios.</p></div>
+
+<div class="kpis">
+<div class="kpi"><strong>9</strong><span>Torres operativas</span></div>
+<div class="kpi"><strong>770</strong><span>Registros procesados</span></div>
+<div class="kpi"><strong>1,759</strong><span>Incidentes totales</span></div>
+<div class="kpi r"><strong>92</strong><span>Incendios detectados</span></div>
+<div class="kpi"><strong>77%</strong><span>Cobertura promedio reportada</span></div>
+</div>
+<p class="note" style="text-align:center;margin:-14px 0 0">Resultados del periodo febrero a julio 2025.</p>
+
+<h3 class="sub">Componentes de la Estrategia</h3>
+<div class="comp">
+<div class="card"><h3>Atención de las causas</h3><p>Prevención de las causas de ignición y coordinación con los núcleos agrarios.</p></div>
+<div class="card"><h3>Detección y tiempo de llegada</h3><p>Torres con cámaras y plataformas digitales de apoyo a la toma de decisiones.</p></div>
+<div class="card"><h3>Infraestructura de combate</h3><p>Brigadas de 8 a 10 integrantes, Prestadores de Servicios Forestales y Sistema de Comando de Incidentes (SCI).</p></div>
+<div class="card"><h3>Capacidades humanas</h3><p>Selección y formación de personal de brigadas, con instituciones y prestadores de servicios.</p></div>
+<div class="card"><h3>Evaluación de impactos y restauración</h3><p>Evaluación de áreas afectadas (incluye drones) y acciones de restauración.</p></div>
+<div class="card"><h3>Coordinación institucional</h3><p>Municipios, CONAFOR, SRNMA, UNAM/UJED y Monitoreo, Reporte y Verificación.</p></div>
+</div>
+
+<h3 class="sub">Resultados del sistema (feb–jul 2025)</h3>
+<div class="two">
+<div class="card bars"><h3>Distribución de incidentes</h3>
+<div class="row"><div style="width:63.3%;background:#5c7f9c">63.3%</div><div style="width:31.5%;background:var(--nar)">31.5%</div><div style="width:5.2%;background:var(--rojo)"></div></div>
+<div class="legend"><i style="background:#5c7f9c"></i>Climáticos: 1,113 (neblina, vientos)<br><i style="background:var(--nar)"></i>Técnicos: 554<br><i style="background:var(--rojo)"></i>Incendios: 92 (5.2%)</div></div>
+<div class="card"><h3>Logros destacados</h3><ul><li>Sistema operativo en las 9 torres</li><li>92 incendios detectados y documentados</li><li>Base de datos estandarizada</li><li>Coordinación con CONAFOR y SRNMA</li><li>Dashboard de monitoreo activo</li></ul></div>
+</div>
+
+<h3 class="sub">Rendimiento por torre de observación</h3>
+<div class="tbl"><table>
+<tr><th>Torre</th><th>Cobertura</th><th>Incendios</th><th>Climáticos</th><th>Técnicos</th><th>Estado</th></tr>
+<tr><td>Jacales</td><td><div class="cv"><u><b style="width:99.6%"></b></u>99.6%</div></td><td>4</td><td>77</td><td>295</td><td><span class="tag t-ex">Excelente*</span></td></tr>
+<tr><td>Tarabilla</td><td><div class="cv"><u><b style="width:99.6%"></b></u>99.6%</div></td><td>3</td><td>212</td><td>0</td><td><span class="tag t-ex">Excelente</span></td></tr>
+<tr><td>Pitoreal</td><td><div class="cv"><u><b style="width:99.5%"></b></u>99.5%</div></td><td>10</td><td>221</td><td>65</td><td><span class="tag t-ex">Excelente</span></td></tr>
+<tr><td>Cebollas</td><td><div class="cv"><u><b style="width:92.5%"></b></u>92.5%</div></td><td>9</td><td>198</td><td>0</td><td><span class="tag t-bu">Bueno</span></td></tr>
+<tr><td>Coroneles</td><td><div class="cv"><u><b style="width:85.9%"></b></u>85.9%</div></td><td>11</td><td>179</td><td>65</td><td><span class="tag t-bu">Bueno</span></td></tr>
+<tr><td>Tarahumar</td><td><div class="cv"><u><b style="width:82.3%"></b></u>82.3%</div></td><td>30</td><td>163</td><td>65</td><td><span class="tag t-al">Alto riesgo</span></td></tr>
+<tr><td>Astilleros</td><td><div class="cv"><u><b style="width:28.6%"></b></u>28.6%</div></td><td>7</td><td>32</td><td>0</td><td><span class="tag t-me">Mejorable</span></td></tr>
+<tr><td>Parajito</td><td><div class="cv"><u><b style="width:36.6%"></b></u>36.6%</div></td><td>10</td><td>29</td><td>0</td><td><span class="tag t-me">Mejorable</span></td></tr>
+<tr><td>Milpas y Anexos</td><td><div class="cv"><u><b style="width:25.3%"></b></u>25.3%</div></td><td>8</td><td>2</td><td>64</td><td><span class="tag t-me">Mejorable</span></td></tr>
+</table></div>
+<p class="note">* Jacales requirió atención técnica urgente (295 incidentes técnicos). Tarahumar concentra la mayor actividad de incendios (30) y se mantiene bajo monitoreo intensificado.</p>
+
+<h3 class="sub">Equipamiento y metas</h3>
+<div class="two">
+<div class="card"><div class="icon">🗼</div><h3>Red de 9 torres</h3><ul><li>7 torres de 22.20 m y 2 de 25.20 m</li><li>Energía solar, pararrayo y equipo de red</li><li>Cámara domo PTZ IP 2 MP, zoom óptico 42x, IR inteligente 400 m, autoseguimiento</li><li>Centro de control y monitoreo</li></ul></div>
+<div class="card"><div class="icon">🎯</div><h3>Metas del proyecto</h3><ul><li>Reducir la superficie afectada al menos 2,800 ha (10%)</li><li>Tiempo de respuesta 50% más corto</li><li>Extinguir incendios antes de que se propaguen</li><li>Mitigar pérdida de hábitats, degradación del suelo y contaminación del aire</li></ul></div>
+</div>
+
+<h3 class="sub">Detección temprana y beneficios</h3>
+<div class="two">
+<div class="card"><h3>¿Por qué la detección temprana?</h3><p>La propagación promedio reciente es de 500 a 900 ha/hora, y en 2017 llegó a 8,240 ha/hora. Detectar en etapas iniciales facilita el control, reduce el área afectada, los costos y las emisiones, y resguarda a los poblados.</p></div>
+<div class="card"><h3>Beneficios</h3><ul><li><b>Económicos:</b> conserva el valor de la madera y reduce gasto de combate</li><li><b>Ambientales:</b> biodiversidad, menos CO₂, suelos y cauces, proyectos de carbono</li><li><b>Sociales:</b> patrimonio de los núcleos, seguridad del personal, colaboración regional</li></ul></div>
+</div>
+
+<h3 class="sub">Acciones de seguimiento técnico</h3>
+<div class="steps">
+<div class="step"><b>Prioridad: Torre Jacales</b>Diagnóstico de cámaras y conectividad, mantenimiento y actualización de firmware.</div>
+<div class="step"><b>Baja cobertura</b>Plan de mejora para Astilleros, Parajito y Milpas y Anexos.</div>
+<div class="step"><b>Torre Tarahumar</b>Protocolo especial por alta actividad de incendios.</div>
+<div class="step"><b>Mantenimiento</b>Preventivo trimestral en todas las torres y respaldo de datos.</div>
+<div class="step"><b>Protocolos climáticos</b>Actualización para neblina y vientos.</div>
+<div class="step"><b>Capacitación</b>Operación de cámaras, emergencias, mantenimiento, coordinación y análisis de datos.</div>
+</div>
+
+<h3 class="sub">Indicadores MRV propuestos</h3>
+<div class="card-grid">
+<div class="card"><h3>Monitoreo</h3><p>Disponibilidad y cobertura por torre, incidentes por tipo, tiempo de detección y de llegada.</p></div>
+<div class="card"><h3>Reporte</h3><p>Base de datos estandarizada, reportes periódicos a socios y enlace con CONAFOR y SRNMA.</p></div>
+<div class="card"><h3>Verificación</h3><p>Superficie afectada frente a la meta de 2,800 ha, evaluación con drones y seguimiento de restauración.</p></div>
+</div>
+
+<h3 class="sub">Coordinación e inversión</h3>
+<div class="two">
+<div class="card"><h3>Coordinación institucional</h3><p>CONAFOR, SRNMA Durango, sistemas nacionales de apoyo (UNAM/UJED), los ayuntamientos de Canelas, Tamazula, Topia, Santiago Papasquiaro, Tepehuanes y Otáez, y Territorios Productivos Sostenibles (SEMARNAT).</p></div>
+<div class="card"><h3>Inversión del proyecto</h3><p>Según el reporte de seguimiento 2025: inversión total de $4.4 MDP, con aportación TPS de $3.7 MDP y de UNECOFAEZ de $674,884.81 (34 de 78 núcleos agrarios).</p></div>
+</div>
+<p class="note">Nota editorial: la presentación inicial del proyecto consigna un costo total de $3,312,637.97 (TPS $2,767,264.18; socios $545,373.80). Confirmar con UNECOFAEZ cuál cifra publicar. Además, el promedio simple de cobertura de las 9 torres de la tabla es cercano a 72%, frente al 77% reportado; conviene validar la metodología.</p>
+</div></section>
+
+<section id="modulos" class="section"><div class="wrap">
+<div class="section-title"><h2>Módulos Estratégicos</h2></div>
+<div class="card-grid">
+<a href="#incendios" style="text-decoration:none;color:inherit"><div class="card link"><div class="icon">🔥</div><h3>Monitoreo de Incendios</h3><p>Red de 9 torres, alertas tempranas, cámaras, puntos de calor y seguimiento de eventos.</p></div></a>
+<div class="card"><div class="icon">🛰️</div><h3>Geoportal</h3><p>Consulta de cartografía, capas temáticas y análisis territorial.</p></div>
+<div class="card"><div class="icon">🌳</div><h3>Sistema MRV</h3><p>Monitoreo, Reporte y Verificación de indicadores forestales.</p></div>
+<div class="card"><div class="icon">💧</div><h3>Recursos Hídricos</h3><p>Cuencas, subcuencas, acuíferos y servicios ambientales.</p></div>
+<div class="card"><div class="icon">🦅</div><h3>Biodiversidad</h3><p>Flora, fauna y ecosistemas estratégicos de la región.</p></div>
+<div class="card"><div class="icon">📄</div><h3>Centro Documental</h3><p>Informes, mapas, estudios técnicos y documentación institucional.</p></div>
+</div></div></section>
+
+<section id="territorio" class="section alt"><div class="wrap"><div class="territorio-box">
+<h2>Territorio UNECOFAEZ</h2>
+<p style="line-height:1.8;margin-top:12px">Organización social forestal fundada en 1978, con amplia cobertura territorial en el noroeste del estado de Durango: 78 núcleos agrarios, 1,081,974 ha y 19,520 habitantes.</p>
+<div class="tags"><span>Santiago Papasquiaro</span><span>Tepehuanes</span><span>Otáez</span><span>Topia</span><span>Tamazula</span><span>Guanaceví</span><span>Canelas</span><span>San Dimas</span></div>
+</div></div></section>
+
+<footer id="contacto">
+<h3 style="margin-bottom:15px">UNECOFAEZ</h3>
+<p>Unión de Ejidos y Comunidades de Producción Forestal y Agropecuaria del Noroeste del Estado de Durango “General Emiliano Zapata”</p>
+<p>Santiago Papasquiaro, Durango, México</p><br>
+<p>Plataforma Territorial Forestal · Con el apoyo de Territorios Productivos Sostenibles</p>
+<p>© 2026 UNECOFAEZ</p>
+</footer>
+</body>
+</html>
